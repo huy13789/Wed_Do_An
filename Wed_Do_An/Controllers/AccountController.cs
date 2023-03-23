@@ -42,7 +42,7 @@ namespace Wed_Do_An.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(FormCollection collection)
+        public ActionResult Login(LoginViewModel model,FormCollection collection)
         {
 
             var tendn = collection["tk"];
