@@ -43,7 +43,7 @@ namespace Wed_Do_An.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection collection, loginVM lg)
         {
-            var tendn = collection["tk"];
+            var tendn = collection["tentk"];
             var matkhau = collection["mk"];
             System.Diagnostics.Debug.WriteLine(tendn);
             System.Diagnostics.Debug.WriteLine(matkhau);
@@ -61,7 +61,7 @@ namespace Wed_Do_An.Controllers
             }
             else
             {
-                KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.mk == MD5Hash(matkhau) && n.MaRole == 1);
+                KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.mk == matkhau);
                 KHACHHANG tkCheck = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.MaRole == 1);
                 if (tkCheck == null)
                 {
@@ -72,7 +72,7 @@ namespace Wed_Do_An.Controllers
                     Session["Taikhoan"] = tk;
                     Session["TKUser"] = tendn;
                     Session.Timeout = 500000;
-                    return RedirectToAction("Index", "Products");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
