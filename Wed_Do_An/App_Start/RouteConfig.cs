@@ -16,7 +16,9 @@ namespace Wed_Do_An
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Wed_Do_An.Controllers" }
+
             );
         }
     }

@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using Wed_Do_An.Models;
+using Wed_Do_An.ViewModel;
 
 namespace Wed_Do_An.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         MyDataDataContext db = new MyDataDataContext();
+        // GET: Account
+
         public ActionResult Index()
         {
-            return RedirectToAction("Login");
+            return View();
         }
+
         [HttpGet]
         public static string MD5Hash(string text)
         {
@@ -37,19 +35,18 @@ namespace Wed_Do_An.Controllers
         }
 
         [HttpGet]
-        public ActionResult DangNhap()
+        public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Login(LoginViewModel model,FormCollection collection)
-        {
 
+        [HttpPost]
+        public ActionResult Login(FormCollection collection, loginVM lg)
+        {
             var tendn = collection["tk"];
             var matkhau = collection["mk"];
             System.Diagnostics.Debug.WriteLine(tendn);
             System.Diagnostics.Debug.WriteLine(matkhau);
-
             if (String.IsNullOrEmpty(tendn) && String.IsNullOrEmpty(matkhau))
             {
                 ViewData["Loi"] = "Vui lòng nhập tài khoản và mật khẩu!";
@@ -65,7 +62,7 @@ namespace Wed_Do_An.Controllers
             else
             {
                 KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.mk == MD5Hash(matkhau) && n.MaRole == 1);
-                KHACHHANG tkCheck = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.tentk == "User");
+                KHACHHANG tkCheck = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.MaRole == 1);
                 if (tkCheck == null)
                 {
                     ViewBag.checkTK = "Tài khoản chưa tồn tại!";
@@ -84,7 +81,5 @@ namespace Wed_Do_An.Controllers
             }
             return View();
         }
-
-
     }
 }
