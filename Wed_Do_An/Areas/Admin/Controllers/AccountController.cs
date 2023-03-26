@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using Wed_Do_An.Models;
 using Wed_Do_An.ViewModel;
 
-namespace Wed_Do_An.Controllers
+namespace Wed_Do_An.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
@@ -71,14 +71,14 @@ namespace Wed_Do_An.Controllers
                 }else if(tkCheck != null)
                 {
                     Session["Taikhoan"] = tendn;
-                    //Session.Timeout = 500000;
+                    Session.Timeout = 500000;
                     return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
                 else if (tk != null)
                 {
                     Session["Taikhoan"] = tendn;
-                    //Session.Timeout = 500000;
-                    return RedirectToAction("Index", "Home");
+                    Session.Timeout = 500000;
+                    return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace Wed_Do_An.Controllers
         public ActionResult LogOff()
         {
             Session["Taikhoan"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }
