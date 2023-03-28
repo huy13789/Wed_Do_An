@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Do_An_Wed.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "QLSanpham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QLSanpham</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MotaSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhanhSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaycapnhatSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoluongSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THUONGHIEU.TenTH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DANHMUC.TenDM)
+        </th>
+        <th> chức năng</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MotaSP)
+        </td>
+        <td>
+            <img src="@Url.Content("~/Content/img/"+item.HinhanhSP)" style="width:60px; height:60px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaycapnhatSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoluongSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THUONGHIEU.TenTH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DANHMUC.TenDM)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaSP }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MaSP }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MaSP })
+        </td>
+    </tr>
+}
+
+</table>

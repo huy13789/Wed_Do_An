@@ -1,0 +1,71 @@
+﻿@model Do_An_Wed.Models.THUONGHIEU
+
+@{
+    ViewBag.Title = "Themmoith";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>THUONGHIEU</h4> 
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Thêm mới</h2>
+               
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br>
+                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Tên thương hiệu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.TenTH, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenTH, "", new { @class = "text-danger" })
+                                @ViewBag.Thongbao
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                Quốc gia sản xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.QuocgiaSX, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.QuocgiaSX, "", new { @class = "text-danger" })
+                                @ViewBag.Thongbao1
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Mô tả thương hiệu <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+
+                                @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
+                                @ViewBag.Thongbao2
+                            </div>
+                        </div>
+        
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 offset-md-3">             
+                                <a href="@Url.Action("QLThuonghieu","Admin")" class="btn btn-primary btn-xs"> Back to page</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@model Do_An_Wed.Models.DANHMUC
+
+@{
+    ViewBag.Title = "Xoadm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center">BẠN CÓ CHẮC MUỐN XÓA DANH MỤC DƯỚI ĐÂY?</h2>
+            <hr />
+            <dl class="row" @*style="margin-left: 110px"*@>
+                <dt class="col-sm-4">Tên danh mục:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.TenDM)</dd>
+             
+            </dl>
+            <div class="text-center" style=" margin-left: -90px">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink("Back to page", "QLDanhmuc", null, new { @class = "btn btn-primary btn-xs" })
+                        <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

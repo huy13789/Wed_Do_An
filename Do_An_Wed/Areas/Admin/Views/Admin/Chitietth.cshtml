@@ -1,0 +1,37 @@
+﻿@model Do_An_Wed.Models.THUONGHIEU
+
+@{
+    ViewBag.Title = "Chi tiết thương hiệu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row" >
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center">Chi tiết thương hiệu</h2>
+            <hr />
+            <dl class="row"  style="margin-left: 133px">
+                <dt class="col-sm-4">Tên thương hiệu:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.TenTH)</dd>
+                <dt class="col-sm-4">Quốc gia sản xuất:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.QuocgiaSX)</dd>
+                <dt class="col-sm-4">Mô tả:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Mota)</dd>
+            </dl>
+            <div class="text-center" style=" margin-left: -50px">
+                @Html.ActionLink("Back to page", "QLThuonghieu", null, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink("Edit", "Suath", new { id = Model.MaTH }, new { @class = "btn btn-danger btn-xs" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    dt {
+        font-weight: bold;
+    }
+
+    hr {
+        border-color: #999999;
+    }
+</style>

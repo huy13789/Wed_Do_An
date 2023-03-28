@@ -1,0 +1,59 @@
+﻿@model Do_An_Wed.Models.THUONGHIEU
+
+@{
+    ViewBag.Title = "Xoath";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@*<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item h5"><a href="/Admin/Brand/Index"><i class="uil-tag-alt"></i> Quản lý thương hiệu</a></li>
+            <li class="breadcrumb-item h5">Xóa thương hiệu</li>
+        </ol>
+    </nav>*@
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-9 col-lg-7 col-xl-6"  style="border: 1px solid black;">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h2 class="text-center">BẠN CÓ CHẮC MUỐN XÓA THƯƠNG HIỆU DƯỚI ĐÂY?</h2>
+                    <hr />
+                    <dl class="row" @*style="margin-left: 110px"*@>
+                        <dt class="col-sm-4">Tên thương hiệu:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.TenTH)</dd>
+                        <dt class="col-sm-4">Quốc gia sản xuất:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.QuocgiaSX)</dd>
+                        <dt class="col-sm-4">Mô tả:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Mota)</dd>
+                    </dl>
+                    <div class="text-center" style=" margin-left: -90px">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                @Html.ActionLink("Back to page", "QLThuonghieu", null, new { @class = "btn btn-primary btn-xs" })
+                                <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div></div>
+        <style>
+            dt {
+                font-weight: bold;
+            }
+
+            hr {
+                border-color: #999999;
+            }
+        </style>
+
+
+
