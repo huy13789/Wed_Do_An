@@ -8,7 +8,7 @@
 <h2>QLSanpham</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Themmoisp")
 </p>
 <table class="table">
     <tr>
@@ -36,7 +36,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DANHMUC.TenDM)
         </th>
-        <th> chức năng</th>
+        <th> 
+            Chức năng
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -48,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.MotaSP)
         </td>
         <td>
-            <img src="@Url.Content("~/Content/img/"+item.HinhanhSP)" style="width:60px; height:60px" />
+            <img src="@item.HinhanhSP" style="width:120px;" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NgaycapnhatSP)

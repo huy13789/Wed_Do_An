@@ -56,12 +56,14 @@
                     @Html.ValidationMessageFor(model => model.GiaSP, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.MaTH, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("MaTH")
                 </div>
             </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.MaDM, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -71,11 +73,8 @@
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.HinhanhSP, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" name="fileupload" />
-                    @ViewBag.Thongbao
-                </div>
+                @Html.LabelFor(row => row.HinhanhSP)
+                @Html.TextBox("fileupload", "", new { type = "file" })
             </div>
 
             <div class="form-group">

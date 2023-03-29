@@ -1,0 +1,48 @@
+﻿@model Do_An_Wed.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Chitietsp";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 card border rounded-4">
+            <h2 class="text-center">Chi tiết sản phẩm</h2>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-3">Tên sản phẩm:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.TenSP)</dd>
+                <dt class="col-sm-3">Ngày cập nhật:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.NgaycapnhatSP)</dd>
+                <dt class="col-sm-3">Số lượng:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SoluongSP)</dd>
+                <dt class="col-sm-3">Hình ảnh:</dt>
+                <dd class="col-sm-9">
+                    <img src="@Url.Content("~/Content/img/" + Model.HinhanhSP)" style="width:224px;height: 257.924px;" />
+                </dd>
+                <dt class="col-sm-3">Danh mục sản phẩm:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DANHMUC.TenDM)</dd>
+                <dt class="col-sm-3">Thương hiệu sản phẩm:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.THUONGHIEU.TenTH)</dd>
+                <dt class="col-sm-3">Mô tả sản phẩm:</dt>
+                <dd class="col-sm-9">@Html.Raw(Model.MotaSP)</dd>
+            </dl>
+            <div class="text-center">
+                @Html.ActionLink("Back to page", "QLSanpham", null, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink("Edit", "Suasp", new { id = Model.MaTH }, new { @class = "btn btn-danger btn-xs" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    dt {
+        font-weight: bold;
+    }
+
+    hr {
+        border-color: #999999;
+    }
+</style>
