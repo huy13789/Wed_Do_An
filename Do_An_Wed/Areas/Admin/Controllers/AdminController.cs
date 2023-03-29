@@ -218,7 +218,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
             return View(data.SANPHAMs.ToList().OrderBy(n => n.MaSP).ToPagedList(pageNumber, pageSize));
         }
         // the moi san pham
-        [HttpGet]
+      [HttpGet]
         public ActionResult Themmoisp()
         {
             ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenTH), "MaTH", "TenTH");
@@ -230,15 +230,20 @@ namespace Do_An_Wed.Areas.Admin.Controllers
         public ActionResult Themmoisp(SANPHAM sanpham, HttpPostedFileBase fileupload)
         {
            
-                //var fileName = Path.GetFileName(fileupload.FileName);
-                //var path = Path.Combine(Server.MapPath("~/Content/img/Kem/"), fileName);
-                string path = Path.Combine(Server.MapPath("/Content/img/"), Path.GetFileName(fileupload.FileName));
-                fileupload.SaveAs(path);
-                sanpham.HinhanhSP = "/Content/img/" + fileupload.FileName;
+                var fileName = Path.GetFileName(fileupload.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/img/Kem/"), fileName);
+                if (System.IO.File.Exists(path))
+                {
+                    ViewBag.Thongbao = "Hình ảnh đã tồn tại ";
+                }
+                else
+                {
+                    //luu hinh anh vao duong dan
+                    fileupload.SaveAs(path);
+                }
                 ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenTH), "MaTH", "TenTH");
                 ViewBag.MaDM = new SelectList(data.DANHMUCs.ToList().OrderBy(n => n.TenDM), "MaDM", "TenDM");
-                //sanpham.HinhanhSP = fileName;
-                //data.SANPHAMs.Add(sanpham);
+                sanpham.HinhanhSP = fileName;
                 data.SANPHAMs.InsertOnSubmit(sanpham);
                 data.SubmitChanges();
                 return RedirectToAction("QLSanpham");
