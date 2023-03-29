@@ -6,19 +6,19 @@
 }
 
 <div class="container">
-    <div class="row" >
-        <div class="col-md-6 offset-md-3">
+    <div class="row d-flex justify-content-center align-items-center"  >
+        <div class="col-md-6 card border rounded-4">
             <h2 class="text-center">Chi tiết thương hiệu</h2>
             <hr />
-            <dl class="row"  style="margin-left: 133px">
-                <dt class="col-sm-4">Tên thương hiệu:</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.TenTH)</dd>
-                <dt class="col-sm-4">Quốc gia sản xuất:</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.QuocgiaSX)</dd>
-                <dt class="col-sm-4">Mô tả:</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Mota)</dd>
+            <dl class="row">
+                <dt class="col-sm-3">Tên thương hiệu:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.TenTH)</dd>
+                <dt class="col-sm-3">Quốc gia sản xuất:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.QuocgiaSX)</dd>
+                <dt class="col-sm-3">Mô tả:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Mota)</dd>
             </dl>
-            <div class="text-center" style=" margin-left: -50px">
+            <div class="text-center">
                 @Html.ActionLink("Back to page", "QLThuonghieu", null, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink("Edit", "Suath", new { id = Model.MaTH }, new { @class = "btn btn-danger btn-xs" })
             </div>

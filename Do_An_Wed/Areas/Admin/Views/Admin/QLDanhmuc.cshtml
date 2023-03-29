@@ -51,6 +51,7 @@
                                 @Html.DisplayFor(modelItem => item.TenDM)
                             </td>   
                             <td>
+                                <a href="@Url.Action("Suadm","Admin",new { id = item.MaDM})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                 <a href="@Url.Action("Xoadm","Admin",new { id = item.MaDM})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                             </td>
                         </tr>

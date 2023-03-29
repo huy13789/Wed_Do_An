@@ -8,14 +8,14 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 card border rounded-4">
             <h2 class="text-center">BẠN CÓ CHẮC MUỐN XÓA DANH MỤC DƯỚI ĐÂY?</h2>
             <hr />
             <dl class="row" @*style="margin-left: 110px"*@>
-                <dt class="col-sm-4">Tên danh mục:</dt>
+                <dt class="col-sm-4" style="padding-left: 100px;">Tên danh mục:</dt>
                 <dd class="col-sm-8">@Html.DisplayFor(model => model.TenDM)</dd>
-             
+
             </dl>
             <div class="text-center" style=" margin-left: -90px">
                 @using (Html.BeginForm())

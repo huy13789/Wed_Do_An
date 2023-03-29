@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Do_An_Wed.Models;
 using PagedList;
 
@@ -13,10 +14,24 @@ namespace Do_An_Wed.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        MyDataDataContext data= new MyDataDataContext();
+        MyDataDataContext data = new MyDataDataContext();
         // GET: Admin/Admin
         public ActionResult Index()
         {
+            List<SANPHAM> list = data.SANPHAMs.ToList();
+            int v = list.Count();
+            List<DANHMUC> dm = data.DANHMUCs.ToList();
+            int d = dm.Count();
+            List<THUONGHIEU> listth = data.THUONGHIEUs.ToList();
+            int t = listth.Count();
+            List<KHACHHANG> TK = data.KHACHHANGs.Where(n => n.MaQuyen == 0).ToList();
+            List<KHACHHANG> TKad = data.KHACHHANGs.Where(n => n.MaQuyen == 1).ToList();
+            ViewBag.sanpham = v;
+            ViewBag.dm = d;
+            ViewBag.thuonghieu = t;
+            ViewBag.khachhang = TK.Count();
+            ViewBag.Admin = TKad.Count();
+            
             return View();
         }
         ///quan ly thuong hiêu
@@ -36,7 +51,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Themmoith(THUONGHIEU thuonghieu)
         {
-            if (string.IsNullOrEmpty(thuonghieu.TenTH ))
+            if (string.IsNullOrEmpty(thuonghieu.TenTH))
             {
                 ViewBag.ThongBao = "Bạn cần nhập tên thương hiệu";
                 return View(thuonghieu.TenTH);
@@ -47,7 +62,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
                 ViewBag.ThongBao = "Tên thương hiệu đã tồn tại";
                 return View(thuonghieu);
             }
-            if (string.IsNullOrEmpty( thuonghieu.QuocgiaSX ))
+            if (string.IsNullOrEmpty(thuonghieu.QuocgiaSX))
             {
                 ViewBag.ThongBao1 = "Bạn cần nhập tên quốc gia sản xuất ";
                 return View(thuonghieu.QuocgiaSX);
@@ -68,9 +83,9 @@ namespace Do_An_Wed.Areas.Admin.Controllers
         //hien thi thuong hiêu
         public ActionResult Chitietth(int id)
         {
-           THUONGHIEU thuonghieu = data.THUONGHIEUs.SingleOrDefault(n => n.MaTH == id);
+            THUONGHIEU thuonghieu = data.THUONGHIEUs.SingleOrDefault(n => n.MaTH == id);
             ViewBag.MaTH = thuonghieu.MaTH;
-           if (thuonghieu == null)
+            if (thuonghieu == null)
             {
                 Response.StatusCode = 404;
                 return null;
@@ -147,7 +162,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
             int pageSize = 4;
             return View(data.DANHMUCs.ToList().OrderBy(n => n.MaDM).ToPagedList(pageNumber, pageSize));
         }
-        //Them thuong hieu
+        //Them danh mục
         [HttpGet]
         public ActionResult Themmoidm()
         {
@@ -167,7 +182,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
                 ViewBag.ThongBao = "Tên danh mục đã tồn tại";
                 return View(danhmuc);
             }
-        
+
 
             // Lưu thương hiệu vào CSDL ở đây
 
@@ -176,7 +191,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
             data.SubmitChanges();
             return RedirectToAction("QLDanhmuc");
         }
-     
+
         //xoa danh muc
         [HttpGet]
         public ActionResult Xoadm(int id)
@@ -205,11 +220,39 @@ namespace Do_An_Wed.Areas.Admin.Controllers
             data.SubmitChanges();
             return RedirectToAction("QLDanhmuc");
         }
+        //sua danh muc
+        [HttpGet]
+        public ActionResult Suadm(int id)
+        {
+            DANHMUC danhmuc = data.DANHMUCs.SingleOrDefault(n => n.MaDM == id);
+            if (danhmuc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
 
+            return View(danhmuc);
+        }
+        [HttpPost, ActionName("Suadm")]
+        [ValidateInput(false)]
+        public ActionResult save(int id)
+        {
+
+            DANHMUC danhmuc = data.DANHMUCs.SingleOrDefault(n => n.MaDM == id);
+            if (danhmuc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            ViewBag.MaTS = danhmuc.MaDM;
+            UpdateModel(danhmuc);
+            data.SubmitChanges();
+            return RedirectToAction("QLDanhmuc");
+        }
         #endregion
         /// quản lý sản phẩm
 
-        //lỗi tụt lz
         #region QUẢN LÝ SẢN PHẨM
         public ActionResult QLSanpham(int? page)
         {
@@ -218,7 +261,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
             return View(data.SANPHAMs.ToList().OrderBy(n => n.MaSP).ToPagedList(pageNumber, pageSize));
         }
         // the moi san pham
-      [HttpGet]
+        [HttpGet]
         public ActionResult Themmoisp()
         {
             ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenTH), "MaTH", "TenTH");
@@ -229,110 +272,314 @@ namespace Do_An_Wed.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Themmoisp(SANPHAM sanpham, HttpPostedFileBase fileupload)
         {
-           
-                var fileName = Path.GetFileName(fileupload.FileName);
-                var path = Path.Combine(Server.MapPath("~/Content/img/Kem/"), fileName);
-                if (System.IO.File.Exists(path))
-                {
-                    ViewBag.Thongbao = "Hình ảnh đã tồn tại ";
-                }
-                else
-                {
-                    //luu hinh anh vao duong dan
-                    fileupload.SaveAs(path);
-                }
-                ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenTH), "MaTH", "TenTH");
-                ViewBag.MaDM = new SelectList(data.DANHMUCs.ToList().OrderBy(n => n.TenDM), "MaDM", "TenDM");
-                sanpham.HinhanhSP = fileName;
-                data.SANPHAMs.InsertOnSubmit(sanpham);
-                data.SubmitChanges();
-                return RedirectToAction("QLSanpham");
-          
+
+            var fileName = Path.GetFileName(fileupload.FileName);
+            var path = Path.Combine(Server.MapPath("~/Content/img/Kem/"), fileName);
+            if (System.IO.File.Exists(path))
+            {
+                ViewBag.Thongbao = "Hình ảnh đã tồn tại ";
+            }
+            else
+            {
+                //luu hinh anh vao duong dan
+                fileupload.SaveAs(path);
+            }
+            ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenTH), "MaTH", "TenTH");
+            ViewBag.MaDM = new SelectList(data.DANHMUCs.ToList().OrderBy(n => n.TenDM), "MaDM", "TenDM");
+            sanpham.HinhanhSP = fileName;
+            data.SANPHAMs.InsertOnSubmit(sanpham);
+            data.SubmitChanges();
+            return RedirectToAction("QLSanpham");
+
         }
 
         //hien thi san pham
-        /*public ActionResult Chitietsp(int id)
+        public ActionResult Chitietsp(int id)
         {
-            Trasua trasua = db.Trasuas.SingleOrDefault(n => n.MaTS == id);
-            ViewBag.MaTS = trasua.MaTS;
-            if (trasua == null)
+            SANPHAM sanpham = data.SANPHAMs.SingleOrDefault(n => n.MaSP == id);
+            ViewBag.MaSP = sanpham.MaSP;
+            if (sanpham == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
-            return View(trasua);
+            return View(sanpham);
         }
+
         //xoa san pham
         [HttpGet]
         public ActionResult Xoasp(int id)
         {
-            Trasua trasua = db.Trasuas.SingleOrDefault(n => n.MaTS == id);
-            ViewBag.MaTS = trasua.MaTS;
-            if (trasua == null)
+            SANPHAM sanpham = data.SANPHAMs.SingleOrDefault(n => n.MaSP == id);
+            ViewBag.MaSP = sanpham.MaSP;
+            if (sanpham == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
-            return View(trasua);
+            return View(sanpham);
         }
         [HttpPost, ActionName("Xoasp")]
         public ActionResult Xacnhanxoa(int id)
         {
-            Trasua trasua = db.Trasuas.SingleOrDefault(n => n.MaTS == id);
-            ViewBag.MaTS = trasua.MaTS;
-            if (trasua == null)
+            SANPHAM sanpham = data.SANPHAMs.SingleOrDefault(n => n.MaSP == id);
+            ViewBag.MaSP = sanpham.MaSP;
+            if (sanpham == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
-            db.Trasuas.DeleteOnSubmit(trasua);
-            db.SubmitChanges();
-            return RedirectToAction("ThemSanPham");
+            data.SANPHAMs.DeleteOnSubmit(sanpham);
+            data.SubmitChanges();
+            return RedirectToAction("QLSanpham");
         }
         //chỉnh sửa sản phẩm
+        // chỉnh sửa sản phẩm
         [HttpGet]
         public ActionResult Suasp(int id)
         {
-            ViewBag.MaTH = new SelectList(db.Thuonghieus.ToList().OrderBy(n => n.MaTH), "MaTH", "TenTH");
-            Trasua trasua = db.Trasuas.SingleOrDefault(n => n.MaTS == id);
-            if (trasua == null)
+
+            SANPHAM sanpham = data.SANPHAMs.SingleOrDefault(n => n.MaSP == id);
+            if (sanpham == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
-
-            return View(trasua);
+            ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.MaTH), "MaTH", "TenTH");
+            ViewBag.MaDM = new SelectList(data.DANHMUCs.ToList().OrderBy(n => n.MaDM), "MaDM", "TenDM");
+            return View(sanpham);
         }
-        [HttpPost, ActionName("Suasp")]
-        [ValidateInput(false)]
-        public ActionResult DropDownList(int id)
-        {
 
-            Trasua product = db.Trasuas.SingleOrDefault(n => n.MaTS == id);
-            if (product == null)
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Suasp(SANPHAM sanpham, HttpPostedFileBase fileUpload)
+        {
+            ViewBag.MaTH = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.MaTH), "MaTH", "TenTH");
+            ViewBag.MaDM = new SelectList(data.DANHMUCs.ToList().OrderBy(n => n.MaDM), "MaDM", "TenDM");
+            if (fileUpload == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                ViewBag.Thongbao = "Vui lòng chọn ảnh";
+                return View();
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var fileName = Path.GetFileName(fileUpload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/img/"), fileName);
+                    if (System.IO.File.Exists(path))
+                        ViewBag.Thongbao = "Hình ảnh đã tồn tại";
+                    else
+                    {
+                        fileUpload.SaveAs(path);
+                    }
+                    sanpham.HinhanhSP = fileName;
+                    UpdateModel(sanpham);
+                    data.SubmitChanges();
+                }
+                return RedirectToAction("SANPHAM");
             }
 
-            ViewBag.MaTS = product.MaTS;
-            UpdateModel(product);
-            db.SubmitChanges();
-            return RedirectToAction("ThemSanPham");
-        }*/
+        }
         #endregion
 
-        //Tài khoản 
-        public ActionResult Edit(int id)
+        ///quản lý khách hàng
+        #region QUAN LY TAI KHOAN KHACH HANG
+        public ActionResult QLKhachhang(int? page)
         {
-            var kh = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
-            return View(kh);
+            int pageNumber = (page ?? 1);
+            int pageSize = 4;
+            return View(data.KHACHHANGs.Where(n => n.MaQuyen == 0).ToList().ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Edit(int id, FormCollection collection)
+        //Xóa khách hàng
+        [HttpGet]
+         public ActionResult Xoatkkh(int id)
+          {
+              KHACHHANG tk = data.KHACHHANGs.Where(n => n.MaQuyen == 0).SingleOrDefault(n => n.MaKH == id);
+              if (tk == null)
+              {
+                  Response.StatusCode = 404;
+                  return null;
+              }
+              ViewBag.MaKH = tk.MaKH;
+              return View(tk);
+          }
+          [HttpPost, ActionName("Xoatkkh")]
+          public ActionResult AcXoatkkh(int id)
+          {
+              KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+              if (tk == null)
+              {
+                  Response.StatusCode = 404;
+                  return null;
+              }
+              ViewBag.MaKH = tk.MaKH;
+              data.KHACHHANGs.DeleteOnSubmit(tk);
+              data.SubmitChanges();
+              return RedirectToAction("QLKhachhang");
+          }
+        //chi tiết khách hàng
+
+          public ActionResult Chitietkh(int id)
+          {
+              KHACHHANG kh = data.KHACHHANGs.Where(n => n.MaQuyen == 0).SingleOrDefault(n => n.MaKH == id);
+              if (kh == null)
+              {
+                  Response.StatusCode = 404;
+                  return null;
+              }
+              ViewBag.MAKH = kh.MaKH;
+              return View(kh);
+          }
+        /// sửa khach hàng
+        [HttpGet]
+        public ActionResult Suakh(int id)
         {
-            
+            ViewBag.maQuyen = new SelectList(data.PHANQUYENs.ToList().OrderBy(n => n.MaQuyen), "MaQuyen", "TenQuyen");
+            KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tk);
+        }
+        [HttpPost, ActionName("Suakh")]
+        [ValidateInput(false)]
+        public ActionResult savekh(int id)
+        {
+            KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            UpdateModel(tk);
+            data.SubmitChanges();
+            return RedirectToAction("QLKhachhang");
+        }
+        #endregion
+        ///quản lý admin
+
+        #region QUẢN LÝ THÔNG TIN ADMIN
+        public ActionResult QLAdmin(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 4;
+            return View(data.KHACHHANGs.Where(n => n.MaQuyen == 1).ToList().ToPagedList(pageNumber, pageSize));
+        }
+        [HttpGet]
+        public ActionResult themad()
+        {
+
+            ViewBag.MaQuyen = new SelectList(data.PHANQUYENs.ToList().OrderBy(n => n.MaQuyen), "MaQuyen", "TenQuyen");
             return View();
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Themad(KHACHHANG taikhoa)
+        {
+            if (string.IsNullOrEmpty(taikhoa.tentk))
+            {
+                ViewBag.ThongBao = "Bạn cần nhập tên tài khoản";
+                return View(taikhoa.tentk);
+            }
+            var brand = data.KHACHHANGs.FirstOrDefault(b => b.tentk == taikhoa.tentk);
+            if (brand != null)
+            {
+                ViewBag.ThongBao = "Tên tài khoản  đã tồn tại";
+                return View(taikhoa);
+            }
+            ViewBag.MaQuyen = new SelectList(data.PHANQUYENs.ToList().OrderBy(n => n.MaQuyen), "MaQuyen", "TenQuyen");
+            data.KHACHHANGs.InsertOnSubmit(taikhoa);
+            data.SubmitChanges();
+            return RedirectToAction("QLAdmin");
+        }
+        [HttpGet]
+        public ActionResult Suaad(int id)
+        {
+            ViewBag.maQuyen = new SelectList(data.PHANQUYENs.ToList().OrderBy(n => n.MaQuyen), "MaQuyen", "TenQuyen");
+            KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tk);
+        }
+        [HttpPost, ActionName("Suaad")]
+        [ValidateInput(false)]
+        public ActionResult savead(int id)
+        {
+            KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            UpdateModel(tk);
+            data.SubmitChanges();
+            return RedirectToAction("QLAdmin");
+        }
+        [HttpGet]
+        public ActionResult Xoaad(int id)
+        {
+            KHACHHANG tk = data.KHACHHANGs.Where(n => n.MaQuyen == 1).SingleOrDefault(n => n.MaKH == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaKH = tk.MaKH;
+            return View(tk);
+        }
+        [HttpPost, ActionName("Xoaad")]
+        public ActionResult upxoaad(int id)
+        {
+            KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaKH = tk.MaKH;
+            data.KHACHHANGs.DeleteOnSubmit(tk);
+            data.SubmitChanges();
+            return RedirectToAction("QLAdmin");
+        }
+        //chi tiết khách hàng
+
+        public ActionResult Chitietad(int id)
+        {
+            KHACHHANG kh = data.KHACHHANGs.Where(n => n.MaQuyen == 1).SingleOrDefault(n => n.MaKH == id);
+            if (kh == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MAKH = kh.MaKH;
+            return View(kh);
+        }
+
+        public ActionResult Chitietadadmin(string id)
+        {
+            KHACHHANG kh = data.KHACHHANGs.Where(n => n.MaQuyen == 1).SingleOrDefault(n => n.tentk == id);
+            if (kh == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MAKH = kh.MaKH;
+            return View(kh);
+        }
+        #endregion
+
+
+
+        ///quản lý đơn hàng
+        #region quan ly Don hang
+        #endregion
+
 
     }
 }

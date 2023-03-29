@@ -1,29 +1,19 @@
 ﻿@using PagedList.Mvc;
 @using Do_An_Wed.Models
-@model PagedList.PagedList<Do_An_Wed.Models.SANPHAM>
+@model PagedList.PagedList<Do_An_Wed.Models.KHACHHANG>
 @{
-    ViewBag.Title = "QLSanpham";
+    ViewBag.Title = "QLAdmin";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-@helper Truncate(string input, int length)
-{
-    if (input.Length < length)
-    {
-        @input
-    }
-    else
-    {
-        @input.Substring(0, length)<text>...</text>
-    }
-}
+
 <link href="~/Content/Admin/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
-<h2 style="font-weight: bold; margin-bottom: 35px;margin-top:30px">DANH SÁCH THƯƠNG HIỆU</h2>
+<h2 style="font-weight: bold; margin-bottom: 35px;margin-top:30px">DANH SÁCH QUẢN TRỊ VIÊN</h2>
 
 <div class="x_panel">
     <div class="x_title">
-        <a href="@Url.Action("Themmoisp", "Admin")" class="btn btn-default" style="margin-bottom: 8px; color: white; background-color: rebeccapurple; ">
-            <i class="fa-pie-circle"></i> Thêm sản phẩm
+        <a href="@Url.Action("Themad", "Admin")" class="btn btn-default" style="margin-bottom: 8px; color: white; background-color: rebeccapurple; ">
+            <i class="fa-pie-circle"></i> Thêm quản trị viên
         </a>
         <div class="clearfix"></div>
     </div>
@@ -36,14 +26,13 @@
                         <th>
                             <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                         </th>
-                        <th class="column-title">Tên sản phẩm </th>
-                        <th class="column-title">Hình ảnh </th>
-                        <th class="column-title"> Số lượng </th>
-                        <th class="column-title">Ngày cập nhật  </th>
-                        <th class="column-title">giá </th>
-                        <th class="column-title">Thương hiệu </th>
-                        <th class="column-title">Danh mục </th>
-                        <th class="column-title">Mô tả </th>
+                        <th class="column-title">Quyền </th>
+                        <th class="column-title">Tên tài khoản </th>
+                        <th class="column-title">Mã tài khoản </th>
+                        <th class="column-title">Tên Admin </th>
+                        <th class="column-title">Địa chỉ  </th>
+
+                        <th class="column-title">Điện thoại </th>
                         <th class="column-title no-link last">
                             <span class="nobr">Chức năng</span>
                         </th>
@@ -61,34 +50,30 @@
                                 <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TenSP)
+                                @Html.DisplayFor(modelItem => item.PHANQUYEN.TenQuyen)
                             </td>
                             <td>
-                                <img src="@item.HinhanhSP" style="width:120px;" />
+                                @Html.DisplayFor(modelItem => item.tentk)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.SoluongSP)
+                                @Html.DisplayFor(modelItem => item.mk)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.NgaycapnhatSP)
+                                @Html.DisplayFor(modelItem => item.HoTen)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.GiaSP)
+                                @Html.DisplayFor(modelItem => item.DiachiKH)
                             </td>
+
                             <td>
-                                @Html.DisplayFor(modelItem => item.THUONGHIEU.TenTH)
+                                @Html.DisplayFor(modelItem => item.DienthoaiKh)
                             </td>
+
+
                             <td>
-                                @Html.DisplayFor(modelItem => item.DANHMUC.TenDM)
-                            </td>
-                            <td>
-                                @Html.Raw(item.MotaSP)
-                                @*@Truncate(item.MotaSP, 50)*@
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Chitietsp","Admin",new { id = item.MaSP})" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                                <a href="@Url.Action("Suasp","Admin",new { id = item.MaSP})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                <a href="@Url.Action("Xoasp","Admin",new { id = item.MaSP})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                <a href="@Url.Action("Chitietad","Admin",new { id = item.MaKH})" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                <a href="@Url.Action("Suaad","Admin",new { id = item.MaKH})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                <a href="@Url.Action("Xoaad","Admin",new { id = item.MaKH})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                             </td>
                         </tr>
                     }
@@ -100,7 +85,6 @@
 
 
 <div class="d-flex justify-content-center">
-    @Html.PagedListPager(Model, page => Url.Action("QLKhachhang", new { page = page }), new PagedListRenderOptions { LiElementClasses = new string[] { "page-item btn btn-sm btn-primary mx-1" } })
+    @Html.PagedListPager(Model, page => Url.Action("QLAdmin", new { page = page }), new PagedListRenderOptions { LiElementClasses = new string[] { "page-item btn btn-sm btn-primary mx-1" } })
 </div>
-
 

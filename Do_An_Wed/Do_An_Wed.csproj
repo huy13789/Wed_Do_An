@@ -229,25 +229,39 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Content\font-awesome.css.map" />
-    <Content Include="Areas\Admin\Views\Admin\QLThuonghieu.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Themmoith.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Chitietth.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Xoath.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Suath.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\QLDanhmuc.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Themmoidm.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Xoadm.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\QLSanpham.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Themmoisp.cshtml" />
     <Content Include="Models\MyData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\Admin\Chitietkh.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Chitietsp.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Chitietth.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\QLAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\QLDanhmuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\QLKhachhang.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\QLSanpham.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\QLThuonghieu.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Suadm.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Suakh.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Suasp.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Suath.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\themad.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Themmoidm.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Themmoisp.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Themmoith.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Xoadm.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Xoasp.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Xoath.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Xoatkkh.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\Chitietad.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Suaad.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Xoaad.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Chitietadadmin.cshtml" />
     <None Include="Models\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
