@@ -10,44 +10,55 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
-
+    <link href="~/Content/NguoiDungLayoutCss/main.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungLayoutCss/about.css" rel="stylesheet" />
+    
 </head>
 <body>
     <div>
-        <nav class="navbar navbar-expand-lg bg-black text-white" style="font-family:'Times New Roman', Times, serif;">
+        <nav class="navbar navbar-expand-lg bg-black text-white" style="font-family:Arial">
             <div class="container-fluid" style="justify-content:space-evenly; position:relative;">
                 <div>
-                    <img style="width: 50px;" src="https://tse1.explicit.bing.net/th?id=OIP.GQEoPX6czlJhfeMsR8tqxwHaIP&pid=Api&P=0</a>" />
+                    <img  style="width: 100px;" src="~/Content/img/hinhnen1.png" />
+                  
                 </div>
                 <div class="font-banner">
                     <a class="navbar-brand text-white " href="/home/index/">TRANG CHỦ</a>
                     <!-----dropdown list-->
                     <div class="dropdown">
-                        <button class="dropbtn navbar-brand text-white">SẢN PHẨM</button>
-                        <div class="dropdown-content">
+                        <a class="dropbtn navbar-brand text-white" href="/sanphams/sanpham/">SẢN PHẨM</a>
+                        @*<div class="dropdown-content">
                             <a href="#">Kem</a>
                             <a href="#">Son</a>
                             <a href="#">Phấn</a>
-                            
-                        </div>
+                        </div>*@
                     </div>
                     <!-----het dropdown list-->
-                    <a class="navbar-brand text-white" href="/about/index/">GIỚI THIỆU</a>
-                </div>
-                <div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <form class="d-flex flex-grow align-items-center flex-wrap  m-4" action="/Product/index">
-                            <label for="search" class="mx-2 my-1"></label>
-                            <input type="search" class="form-control w-auto me-2" id="search" name="search" placeholder="Bạn Muốn Tìm Gì ?" />
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                    <!------->
+                    <div class="dropdown">
+                        <button class="dropbtn navbar-brand text-white">GIỚI THIỆU</button>
+                        <div class="dropdown-content">
+                            <a href="/home/gioithieu">Về chúng tôi</a>
+                            <a href="/home/about">Chi nhánh</a>
+                        </div>
                     </div>
+                    <!------->
+
                 </div>
-                
+
+                @using (Html.BeginForm("LayTuKhoaTimKiem", "Timkiem"))
+                {
+
+                       <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Nhập tên sản phẩm...">
+                          <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-success">Tìm kiếm</button>
+                          </div>
+                        </div>
+                    }
                 <div>
                     <img src="https://theme.hstatic.net/1000376837/1000904744/14/cart-icon.png?v=650" style="width:25px;" />
-                    <a class="navbar-brand text-white" href="/Account/Cart">Giỏ Hàng</a>
+                    @Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")
                 </div>
 
                 <div>
@@ -77,35 +88,37 @@
     <div>
         @RenderBody()
     </div>
+
+
+
+
+
     <footer style="margin-top: 30px;" class="footer">
         <div class="container">
             <div class="row">
                 <div class="footer-col">
-                    <h4>company</h4>
+                    <h4>NHÓM PHÁT TRIỂN</h4>
                     <ul>
-                        <li><a href="#">about us</a></li>
-                        <li><a href="#">our services</a></li>
-                        <li><a href="#">privacy policy</a></li>
-                        <li><a href="#">affiliate program</a></li>
+                        <li><a href="#">Phan Văn Đạt</a></li>
+                        <li><a href="#">Huỳnh Hiểu Nghiệm</a></li>
+                        <li><a href="#">Ngô Nguyễn Huy</a></li>
+                        <li><a href="#">Nguyễn Minh Đức</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>get help</h4>
+                    <h4>HỖ TRỢ KHÁCH HÀNG</h4>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">shipping</a></li>
-                        <li><a href="#">returns</a></li>
-                        <li><a href="#">order status</a></li>
-                        <li><a href="#">payment options</a></li>
+                        <li><a href="#">Tổng Đài: 086 368 7466</a></li>
+                        <li><a href="#">P. Hỗ trợ khách hàng: </a></li>
+                        <li><a href="#">phandat6602@gmail.con</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>online shop</h4>
+                    <h4>GIỚI THIỆU</h4>
                     <ul>
-                        <li><a href="#">watch</a></li>
-                        <li><a href="#">bag</a></li>
-                        <li><a href="#">shoes</a></li>
-                        <li><a href="#">dress</a></li>
+                        <li><a href="#">Trang Chủ</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="/home/about">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -122,161 +135,171 @@
     </footer>
 
 
-
     <style>
+    @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+    body {
+    line-height: 1.5;
+    }
 
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
 
-        @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        body {
-            line-height: 1.5;
-        }
-	
- *{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-}
-.container{
-	max-width: 1170px;
-	margin:auto;
-}
-.row{
-	display: flex;
-	flex-wrap: wrap;
-}
-ul{
-	list-style: none;
-}
-.footer{
-	background-color: #24262b;
+    .container {
+    max-width: 1170px;
+    margin: auto;
+    }
+
+    .row {
+    display: flex;
+    flex-wrap: wrap;
+    }
+
+    ul {
+    list-style: none;
+    }
+
+    .footer {
+    background-color: #24262b;
     padding: 70px 0;
-}
-.footer-col{
-   width: 25%;
-   padding: 0 15px;
-}
-.footer-col h4{
-	font-size: 18px;
-	color: #ffffff;
-	text-transform: capitalize;
-	margin-bottom: 35px;
-	font-weight: 500;
-	position: relative;
-}
-.footer-col h4::before{
-	content: '';
-	position: absolute;
-	left:0;
-	bottom: -10px;
-	background-color: #e91e63;
-	height: 2px;
-	box-sizing: border-box;
-	width: 50px;
-}
-.footer-col ul li:not(:last-child){
-	margin-bottom: 10px;
-}
-.footer-col ul li a{
-	font-size: 16px;
-	text-transform: capitalize;
-	color: #ffffff;
-	text-decoration: none;
-	font-weight: 300;
-	color: #bbbbbb;
-	display: block;
-	transition: all 0.3s ease;
-}
-.footer-col ul li a:hover{
-	color: #ffffff;
-	padding-left: 8px;
-}
-.footer-col .social-links a{
-	display: inline-block;
-	height: 40px;
-	width: 40px;
-	background-color: rgba(255,255,255,0.2);
-	margin:0 10px 10px 0;
-	text-align: center;
-	line-height: 40px;
-	border-radius: 50%;
-	color: #ffffff;
-	transition: all 0.5s ease;
-}
-.footer-col .social-links a:hover{
-	color: #24262b;
-	background-color: #ffffff;
-}
+    }
 
-/*responsive*/
-@@media(max-width: 767px){
-  .footer-col{
+    .footer-col {
+    width: 25%;
+    padding: 0 15px;
+    }
+
+    .footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+    }
+
+    .footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+    }
+
+    .footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+    }
+
+    .footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+    }
+
+    .footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+    }
+
+    .footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+    }
+
+    /*responsive*/
+    @@media(max-width: 767px) {
+    .footer-col {
     width: 50%;
     margin-bottom: 30px;
-}
-}
-@@media(max-width: 574px){
-  .footer-col{
-    width: 100%;
-}
-}
-        /*style dropdown menu hover*/
-        .dropbtn {
-            background-color: black;
-            color: white;
-            padding: 16px;
-            font-size: 20px;
-            border: none;
-        }
+    }
+    }
 
-        /* The container <div> - needed to position the dropdown content */
+    @@media(max-width: 574px) {
+    .footer-col {
+    width: 100%;
+    }
+    }
+    /*style dropdown menu hover*/
+    .dropbtn {
+    background-color: black;
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    border: none;
+    }
+
+    /* The container <div>
+        - needed to position the dropdown content */
         .dropdown {
-            position: relative;
-            display: inline-block;
+        position: relative;
+        display: inline-block;
         }
 
         /* Dropdown Content (Hidden by Default) */
         .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
         }
 
-            /* Links inside the dropdown */
-            .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
+        /* Links inside the dropdown */
+        .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        }
 
-                /* Change color of dropdown links on hover */
-                .dropdown-content a:hover {
-                    background-color: #ddd;
-                }
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+        background-color: #ddd;
+        }
 
         /* Show the dropdown menu on hover */
         .dropdown:hover .dropdown-content {
-            display: block;
+        display: block;
         }
 
         /* Change the background color of the dropdown button when the dropdown content is shown */
         .dropdown:hover .dropbtn {
-            background-color: black;
-        }    
-    
-    </style>
+        background-color: black;
+        }
+        </style>
 
-    <script src="~/bootstrap/js/jquery-3.3.1.min.js"></script>
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/bootstrap/js/jquery-3.3.1.min.js"></script>
+        <script src="~/bootstrap/js/bootstrap.min.js"></script>
 
-    
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 
 </body>
 </html>

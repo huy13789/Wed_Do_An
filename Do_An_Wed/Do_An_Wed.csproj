@@ -175,17 +175,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DanhmucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KhachhangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanphamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThuonghieuController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\SanphamsController.cs" />
+    <Compile Include="Controllers\TimkiemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Giohang.cs" />
     <Compile Include="Models\MyData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Momo\MoMoSecurity.cs" />
+    <Compile Include="Momo\PaymentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\loginVM.cs" />
   </ItemGroup>
@@ -210,14 +220,20 @@
     <Content Include="Content\custom.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\img\Kem\a.jpg" />
-    <Content Include="Content\img\Kem\b.jpg" />
-    <Content Include="Content\img\Kem\c.jpg" />
-    <Content Include="Content\img\Kem\d.jpg" />
-    <Content Include="Content\img\Son\phuc hoi do am la roche 280k.jpg" />
-    <Content Include="Content\img\Son\son duong australis 220k.jpg" />
-    <Content Include="Content\img\Son\son duong nature 185k.jpg" />
-    <Content Include="Content\img\Son\son kem li charme 185k.jpg" />
+    <Content Include="Content\img\a.jpg" />
+    <Content Include="Content\img\b.jpg" />
+    <Content Include="Content\img\c.jpg" />
+    <Content Include="Content\img\d.jpg" />
+    <Content Include="Content\img\hero-1.jpg" />
+    <Content Include="Content\img\hero-2.jpg" />
+    <Content Include="Content\img\hero-3.jpg" />
+    <Content Include="Content\img\hinhnen1.png" />
+    <Content Include="Content\img\phuc hoi do am la roche 280k.jpg" />
+    <Content Include="Content\img\son duong australis 220k.jpg" />
+    <Content Include="Content\img\son duong nature 185k.jpg" />
+    <Content Include="Content\img\son kem li charme 185k.jpg" />
+    <Content Include="Content\NguoiDungLayoutCss\about.css" />
+    <Content Include="Content\NguoiDungLayoutCss\main.css" />
     <Content Include="Content\nprogress.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -235,33 +251,32 @@
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\Admin\Chitietkh.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Chitietsp.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Chitietth.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Chitietkh.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPham\Chitietsp.cshtml" />
+    <Content Include="Areas\Admin\Views\Thuonghieu\Chitietth.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\QLAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\QLDanhmuc.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\QLKhachhang.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\QLSanpham.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\QLThuonghieu.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Suadm.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Suakh.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Suasp.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Suath.cshtml" />
+    <Content Include="Areas\Admin\Views\Danhmuc\QLDanhmuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\QLKhachhang.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPham\QLSanpham.cshtml" />
+    <Content Include="Areas\Admin\Views\Thuonghieu\QLThuonghieu.cshtml" />
+    <Content Include="Areas\Admin\Views\Danhmuc\Suadm.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Suakh.cshtml" />
+    <Content Include="Areas\Admin\Views\Thuonghieu\Suath.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\themad.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Themmoidm.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Themmoisp.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Themmoith.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Xoadm.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Xoasp.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Xoath.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Xoatkkh.cshtml" />
+    <Content Include="Areas\Admin\Views\Danhmuc\Themmoidm.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPham\Themmoisp.cshtml" />
+    <Content Include="Areas\Admin\Views\Thuonghieu\Themmoith.cshtml" />
+    <Content Include="Areas\Admin\Views\Danhmuc\Xoadm.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPham\Xoasp.cshtml" />
+    <Content Include="Areas\Admin\Views\Thuonghieu\Xoath.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Xoatkkh.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Admin\Chitietad.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Suaad.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Xoaad.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Chitietadadmin.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPham\Suasp.cshtml" />
     <None Include="Models\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -313,9 +328,7 @@
     <Content Include="Scripts\nprogress\Readme.md" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\SanPham\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -323,6 +336,18 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\DangKy.cshtml" />
+    <Content Include="Views\Home\Gioithieu.cshtml" />
+    <Content Include="Views\Sanphams\sanpham.cshtml" />
+    <Content Include="Views\Sanphams\Danhmuc.cshtml" />
+    <Content Include="Views\Sanphams\Thuonghieu.cshtml" />
+    <Content Include="Views\Sanphams\Chitiet.cshtml" />
+    <Content Include="Views\Sanphams\SPTheodanhmuc.cshtml" />
+    <Content Include="Views\Sanphams\SPTheothuonghieu.cshtml" />
+    <Content Include="Views\Timkiem\KQTimkiem.cshtml" />
+    <Content Include="Views\Giohang\Giohang.cshtml" />
+    <Content Include="Views\Giohang\GiohangPartial.cshtml" />
+    <Content Include="Views\Giohang\DatHang.cshtml" />
+    <Content Include="Views\Giohang\XacNhanDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

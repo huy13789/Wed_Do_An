@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Do_An_Wed.Models.THUONGHIEU>
+@{
+    ViewBag.Title = "Thuonghieu";
+  
+}
+
+<p class="lead" style="font-weight: 600; color: #212529;"> THƯƠNG HIỆU MỸ PHẨM</p>
+<div class="list-group" style="font-size: 16px; font-weight: 600;">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("SPTheothuonghieu", "Sanphams", new { id = item.MaTH })" class="list-group-item">
+            @item.TenTH
+        </a>
+
+    }
+</div>
+

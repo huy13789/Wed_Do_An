@@ -1,0 +1,123 @@
+﻿@model Do_An_Wed.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Themmoisp";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Themmoisp", "Sanpham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>SAN PHẨM</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Thêm mới</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Ngày cập nhật <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+
+                                    <input type="date" name="NgaycapnhatSP" />
+                                    @Html.ValidationMessageFor(model => model.NgaycapnhatSP, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                    Tên sản phẩm <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                    Số lượng <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    @Html.EditorFor(model => model.SoluongSP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SoluongSP, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                    giá bán <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    @Html.EditorFor(model => model.GiaSP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GiaSP, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                    Thương hiệu <span class="required">*</span>
+                                </label>
+                                <div class="col-md-10">
+                                    @Html.DropDownList("MaTH")
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                    Danh mục <span class="required">*</span>
+                                </label>
+                                <div class="col-md-10">
+                                    @Html.DropDownList("MaDM")
+                                </div>
+                            </div>
+
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                    Hình ảnh <span class="required">*</span>
+                                </label>
+                                <input type="file" id="uploadhinh" name="uploadhinh" accept="image/*" />
+                                @ViewBag.Thongbao
+                            </div>
+
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                    Mô tả <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+
+
+                                    <textarea name="MotaSP"></textarea>
+
+
+                                </div>
+                            </div>
+                            s
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <a href="@Url.Action("QLSanpham","Sanpham")" class="btn btn-primary btn-xs"> Back to page</a>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

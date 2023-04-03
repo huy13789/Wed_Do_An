@@ -31,6 +31,8 @@ namespace Do_An_Wed.Controllers
                 strBuilder.Append(result[i].ToString("x2"));
             }
             return strBuilder.ToString();
+            //mã hóa ở đây lúc đăng kí, nên đăng nhặp cg phải mã hóa ngược, ok chưa
+           
         }
 
         [HttpGet]
@@ -61,7 +63,7 @@ namespace Do_An_Wed.Controllers
             else
             {
                 KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.mk == MD5Hash(matkhau));
-                KHACHHANG tkCheck = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.MaQuyen == 1);
+                KHACHHANG tkCheck = db.KHACHHANGs.SingleOrDefault(n => n.tentk == tendn && n.MaRole == 1);
                 if (tk == null)
                 {
                     ViewBag.checkTK = "Tài khoản chưa tồn tại!";
@@ -76,7 +78,8 @@ namespace Do_An_Wed.Controllers
                 }
                 else if (tk != null)
                 {
-                    Session["Taikhoan"] = tendn;
+                    Session["Taikhoan"] = tk.HoTen;
+                    Session["TaikhoanCart"] = tk;
                     Session.Timeout = 500000;
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
@@ -149,7 +152,7 @@ namespace Do_An_Wed.Controllers
                 kh.DiachiKH = sdt;
                 kh.tentk = tendn;
                 kh.mk = MD5Hash(matkhau);
-                kh.MaQuyen = 0;
+                kh.MaRole = 0;
 
                 db.KHACHHANGs.InsertOnSubmit(kh);
                 db.SubmitChanges();

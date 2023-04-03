@@ -1,302 +1,77 @@
-﻿@{
-    ViewBag.Title = "Mỹ Phẩm";
+﻿@model IEnumerable<Do_An_Wed.Models.SANPHAM>
+@{
+    ViewBag.Title = "Mỹ phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-
-
-<div class="row">
-
-    <div class="anhtrangtri" align="center"><img src="https://adminbeauty.hvnet.vn/Upload/Files/banner-min.jpg?v=1" /></div>
-    <div class="tieude2" style="display: flex; justify-content: center; align-items: center; font-size: 80px; margin-top: 100px; color: #2D6E40; font-family: 'Baloo Chettan 2', cursive; ">Flash <img src="https://cdn-icons-png.flaticon.com/128/384/384994.png" style="margin-left:10px;" /></div>
-    <div class="col-md-4" style="font-family:'Times New Roman', Times, serif;">
- 
-        @*Chỗ đễ paglist*@
-
+@*slider*@
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="2500">
+            <img src="~/Content/img/hero-1.jpg" class="d-block" width="1520" height="500" alt="1">
+        </div>
+        <div class="carousel-item" data-bs-interval="2500">
+            <img src="~/Content/img/hero-2.jpg" class="d-block" width="1520" height="500" alt="2">
+        </div>
+        <div class="carousel-item" data-bs-interval="2500">
+            <img src="~/Content/img/hero-3.jpg" class="d-block" width="1520" height="500" alt="3">
+        </div>
     </div>
-
-   
-   
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
 
-
-<style type="text/css">
-
+@*slider*@
 
 
 
+<div class="anhtrangtri" align="center"><img src="https://adminbeauty.hvnet.vn/Upload/Files/banner-min.jpg?v=1" /></div>
+<div class="tieude2" style="display: flex; justify-content: center; align-items: center; font-size: 80px; margin-top: 100px; color: #2D6E40; font-family: 'Baloo Chettan 2', cursive; ">Flash <img src="https://cdn-icons-png.flaticon.com/128/384/384994.png" style="margin-left:10px;" /></div>
 
+ @*   trang trí*@
 
-    * {
-        
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        text-decoration: none;
-       
-    }
+@*Chỗ đễ paglist*@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 mx-auto" style="width:auto;">
+            <div class="product">
+                <div class="headlien">
+                    <h3>Sản phẩm mới nhất</h3>
+                    <hr />
+                </div>
+                <ul class="products" style="justify-content: center;">
+                    @foreach (var item in Model)
+                    {
 
+                        <li>
+                            <div class="product-item">
+                                <div class="product-top">
+                                    <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-thumb">
+                                        <img src="@Url.Content("~/Content/img/" + item.HinhanhSP)" />
+                                    </a>
+                                    <a href="#" class="buy-now">
+                                        mua ngay
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <a href="@Url.Action("details", "Home", new {id = item.MaSP})" class="product-name"> @item.TenSP</a>
+                                    <div class="product-price">@item.GiaSP VND</div>
+                                </div>
+                            </div>
+                        </li>
 
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-
-
-    .sidebar {
-        margin-top: -505px;
-        position: fixed;
-        left: -250px;
-        width: 250px;
-        height: 100%;
-        background: #042331;
-        transition: all .5s ease;
-        z-index: 2;
-    }
-
-    .sidebar header {
-        font-size: 22px;
-        color: white;
-        text-align: center;
-        line-height:70px;
-        background: #063146;
-        user-select:none;
-    }
-
-
-        .sidebar ul a {
-            display: block;
-            height: 100%;
-            width: 100%;
-            line-height: 65px;
-            font-size: 20px;
-            color: white;
-            padding-left: 10px;
-            box-sizing: border-box;
-            border-top: 1px solid rgba(255, 255, 255, .1);
-            border-bottom: 1px solid black;
-            transition: .4s;
-            text-decoration: none;
-            padding-top: 60px;
-        }
-
-    ul li:hover a{
-        padding-left: 50px;
-
-    }
-    .sidebar ul a i{
-        margin-right: 13px;
-
-    }
-
-    #check {
-        display: none;
-    }
-
-    label #btn, label #cancel {
-        position: absolute;
-        cursor: pointer;
-        background: #042331;
-        border-radius: 3px;
-    }
-
-
-        label #btn {
-            left: 30px;
-            top: 78px;
-            font-size: 35px;
-            color: white;
-            padding: 6px 12px;
-            transition: all .5s;
-        }
-
-
-        label #cancel {
-            z-index: 1111;
-            left: -195px;
-            top: 16px;
-            font-size: 35px;
-            color: #0a5275;
-            padding: 4px 9px;
-            transition: all .5s ease;
-            position: fixed;
-        }
-
-        #check:checked ~ .sidebar{
-            left:0;
-        }
-
-    #check:checked ~ label #btn {
-        left: 250px;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    #check:checked ~ label #cancel {
-        left: 195px;
-    }
-
-        .images-sp {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-    .img-banner {
-        margin-left: 160px;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-
-
-
-
-    .bt-danduong {
-        margin-left: 1111px;
-        margin-top: -92px;
-    }
-
-    .btnn {
-        
-        background-color: transparent;
-        padding: 15px 35px;
-        border: 2px solid #eaa03e;
-        border-radius: 100px;
-        color: #eaa03e;
-        margin-top: 30px;
-        margin-left: 680px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-    }
-
-        .btnn:hover {
-            background-color: #ffffff;
-            color: #eaa03e;
-        }
-
-
-
-
-
-
-
-    .btn btn-default {
-        color: aquamarine;
-    }
-
-    .lead {
-        color: #666b69;
-        margin-left: 350px;
-    }
-
-    .Tieude {
-        font-family: 'Baloo Chettan 2', cursive;
-        color: #2e8282;
-        margin-left: 600px;
-    }
-
-    .Sonn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 23px;
-        margin-top: 50px;
-        color: #2E5946;
-    }
-
-    .jumbotron {
-        background-color: #dce8e8;
-    }
-    .images-sp {
-        margin-left: 30px;
-        border-radius: 30px;
-    }
-
-    .btn-dathang {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: -105px;
-    }
-
-    .btnnn {
-       
-        color: #E69191;
-        border-radius: 80px;
-        font-size: 18px;
-        width: 125px;
-        opacity: 0.5;
-        border: 2px solid #eaa03e;
-        animation: hearderAnimation;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        transition: 0.3s;
-        background-color: #F2EDF0;
-    }
-
-        .btnnn:hover {
-            background: transparent;
-            background-color: #ffffff;
-            color: #eaa03e;
-            border: 2px solid #eaa03e;
-        }
-
-
-    .btn-chitiet {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 165px;
-        margin-top: -32px;
-    }
-
-    .btnnnn {
-        
-        color: #E69191;
-        border-radius: 80px;
-        font-size: 18px;
-        width: 125px;
-        opacity: 0.5;
-        border: 2px solid #eaa03e;
-        animation: hearderAnimation;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        transition: 0.3s;
-        background-color: #F2EDF0;
-    }
-
-        .btnnnn:hover {
-            
-            background: transparent;
-            color: #eaa03e;
-            background-color: #ffffff;
-            border: 2px solid #eaa03e;
-        }
-
-    .vien-img {
-        cursor: pointer;
-        border: 2px solid #ffffff;
-        animation: hearderAnimation;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        transition: 0.3s;
-        background-color: #ffffff; 
-        
-    }
-
-        .vien-img:hover {
-            background: transparent;
-            background-color: #FAFAFA;
-            color: #dce8e8;
-            border: 2px solid #ffffff;
-            
-        }
-
-        .btn-chitiet, .btn-dathang {
-            z-index: 1;
-        }
-    
-
-        
-</style>
 

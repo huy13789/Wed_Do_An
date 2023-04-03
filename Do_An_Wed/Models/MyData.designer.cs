@@ -42,9 +42,9 @@ namespace Do_An_Wed.Models
     partial void InsertKHACHHANG(KHACHHANG instance);
     partial void UpdateKHACHHANG(KHACHHANG instance);
     partial void DeleteKHACHHANG(KHACHHANG instance);
-    partial void InsertPHANQUYEN(PHANQUYEN instance);
-    partial void UpdatePHANQUYEN(PHANQUYEN instance);
-    partial void DeletePHANQUYEN(PHANQUYEN instance);
+    partial void InsertRole(Role instance);
+    partial void UpdateRole(Role instance);
+    partial void DeleteRole(Role instance);
     partial void InsertSANPHAM(SANPHAM instance);
     partial void UpdateSANPHAM(SANPHAM instance);
     partial void DeleteSANPHAM(SANPHAM instance);
@@ -115,11 +115,11 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<PHANQUYEN> PHANQUYENs
+		public System.Data.Linq.Table<Role> Roles
 		{
 			get
 			{
-				return this.GetTable<PHANQUYEN>();
+				return this.GetTable<Role>();
 			}
 		}
 		
@@ -146,17 +146,13 @@ namespace Do_An_Wed.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaSP;
-		
 		private int _MaDH;
 		
 		private System.Nullable<int> _Soluong;
 		
 		private System.Nullable<decimal> _Dongia;
 		
-		private int _MaTH;
-		
-		private int _MaDM;
+		private int _MaSP;
 		
 		private EntityRef<DONHANG> _DONHANG;
 		
@@ -166,18 +162,14 @@ namespace Do_An_Wed.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaSPChanging(int value);
-    partial void OnMaSPChanged();
     partial void OnMaDHChanging(int value);
     partial void OnMaDHChanged();
     partial void OnSoluongChanging(System.Nullable<int> value);
     partial void OnSoluongChanged();
     partial void OnDongiaChanging(System.Nullable<decimal> value);
     partial void OnDongiaChanged();
-    partial void OnMaTHChanging(int value);
-    partial void OnMaTHChanged();
-    partial void OnMaDMChanging(int value);
-    partial void OnMaDMChanged();
+    partial void OnMaSPChanging(int value);
+    partial void OnMaSPChanged();
     #endregion
 		
 		public CHITIETDONHANG()
@@ -187,31 +179,7 @@ namespace Do_An_Wed.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaSP
-		{
-			get
-			{
-				return this._MaSP;
-			}
-			set
-			{
-				if ((this._MaSP != value))
-				{
-					if (this._SANPHAM.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaSPChanging(value);
-					this.SendPropertyChanging();
-					this._MaSP = value;
-					this.SendPropertyChanged("MaSP");
-					this.OnMaSPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDH", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDH", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int MaDH
 		{
 			get
@@ -275,50 +243,26 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTH", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaTH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaSP
 		{
 			get
 			{
-				return this._MaTH;
+				return this._MaSP;
 			}
 			set
 			{
-				if ((this._MaTH != value))
+				if ((this._MaSP != value))
 				{
 					if (this._SANPHAM.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaTHChanging(value);
+					this.OnMaSPChanging(value);
 					this.SendPropertyChanging();
-					this._MaTH = value;
-					this.SendPropertyChanged("MaTH");
-					this.OnMaTHChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDM", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaDM
-		{
-			get
-			{
-				return this._MaDM;
-			}
-			set
-			{
-				if ((this._MaDM != value))
-				{
-					if (this._SANPHAM.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaDMChanging(value);
-					this.SendPropertyChanging();
-					this._MaDM = value;
-					this.SendPropertyChanged("MaDM");
-					this.OnMaDMChanged();
+					this._MaSP = value;
+					this.SendPropertyChanged("MaSP");
+					this.OnMaSPChanged();
 				}
 			}
 		}
@@ -357,7 +301,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SANPHAM_CHITIETDONHANG", Storage="_SANPHAM", ThisKey="MaSP,MaTH,MaDM", OtherKey="MaSP,MaTH,MaDM", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SANPHAM_CHITIETDONHANG", Storage="_SANPHAM", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true)]
 		public SANPHAM SANPHAM
 		{
 			get
@@ -381,14 +325,10 @@ namespace Do_An_Wed.Models
 					{
 						value.CHITIETDONHANGs.Add(this);
 						this._MaSP = value.MaSP;
-						this._MaTH = value.MaTH;
-						this._MaDM = value.MaDM;
 					}
 					else
 					{
 						this._MaSP = default(int);
-						this._MaTH = default(int);
-						this._MaDM = default(int);
 					}
 					this.SendPropertyChanged("SANPHAM");
 				}
@@ -426,6 +366,8 @@ namespace Do_An_Wed.Models
 		
 		private string _TenDM;
 		
+		private string _Mota;
+		
 		private EntitySet<SANPHAM> _SANPHAMs;
 		
     #region Extensibility Method Definitions
@@ -436,6 +378,8 @@ namespace Do_An_Wed.Models
     partial void OnMaDMChanged();
     partial void OnTenDMChanging(string value);
     partial void OnTenDMChanged();
+    partial void OnMotaChanging(string value);
+    partial void OnMotaChanged();
     #endregion
 		
 		public DANHMUC()
@@ -480,6 +424,26 @@ namespace Do_An_Wed.Models
 					this._TenDM = value;
 					this.SendPropertyChanged("TenDM");
 					this.OnTenDMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mota", DbType="NVarChar(MAX)")]
+		public string Mota
+		{
+			get
+			{
+				return this._Mota;
+			}
+			set
+			{
+				if ((this._Mota != value))
+				{
+					this.OnMotaChanging(value);
+					this.SendPropertyChanging();
+					this._Mota = value;
+					this.SendPropertyChanged("Mota");
+					this.OnMotaChanged();
 				}
 			}
 		}
@@ -777,11 +741,11 @@ namespace Do_An_Wed.Models
 		
 		private string _mk;
 		
-		private int _MaQuyen;
+		private int _MaRole;
 		
 		private EntitySet<DONHANG> _DONHANGs;
 		
-		private EntityRef<PHANQUYEN> _PHANQUYEN;
+		private EntityRef<Role> _Role;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -801,14 +765,14 @@ namespace Do_An_Wed.Models
     partial void OntentkChanged();
     partial void OnmkChanging(string value);
     partial void OnmkChanged();
-    partial void OnMaQuyenChanging(int value);
-    partial void OnMaQuyenChanged();
+    partial void OnMaRoleChanging(int value);
+    partial void OnMaRoleChanged();
     #endregion
 		
 		public KHACHHANG()
 		{
 			this._DONHANGs = new EntitySet<DONHANG>(new Action<DONHANG>(this.attach_DONHANGs), new Action<DONHANG>(this.detach_DONHANGs));
-			this._PHANQUYEN = default(EntityRef<PHANQUYEN>);
+			this._Role = default(EntityRef<Role>);
 			OnCreated();
 		}
 		
@@ -832,7 +796,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="VarChar(50)")]
 		public string HoTen
 		{
 			get
@@ -892,7 +856,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DienthoaiKh", DbType="Char(11)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DienthoaiKh", DbType="VarChar(50)")]
 		public string DienthoaiKh
 		{
 			get
@@ -912,7 +876,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tentk", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tentk", DbType="Char(20)")]
 		public string tentk
 		{
 			get
@@ -932,7 +896,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mk", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mk", DbType="Char(50)")]
 		public string mk
 		{
 			get
@@ -952,26 +916,26 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQuyen", DbType="Int NOT NULL")]
-		public int MaQuyen
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaRole", DbType="Int NOT NULL")]
+		public int MaRole
 		{
 			get
 			{
-				return this._MaQuyen;
+				return this._MaRole;
 			}
 			set
 			{
-				if ((this._MaQuyen != value))
+				if ((this._MaRole != value))
 				{
-					if (this._PHANQUYEN.HasLoadedOrAssignedValue)
+					if (this._Role.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaQuyenChanging(value);
+					this.OnMaRoleChanging(value);
 					this.SendPropertyChanging();
-					this._MaQuyen = value;
-					this.SendPropertyChanged("MaQuyen");
-					this.OnMaQuyenChanged();
+					this._MaRole = value;
+					this.SendPropertyChanged("MaRole");
+					this.OnMaRoleChanged();
 				}
 			}
 		}
@@ -989,36 +953,36 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHANQUYEN_KHACHHANG", Storage="_PHANQUYEN", ThisKey="MaQuyen", OtherKey="MaQuyen", IsForeignKey=true)]
-		public PHANQUYEN PHANQUYEN
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_KHACHHANG", Storage="_Role", ThisKey="MaRole", OtherKey="MaRole", IsForeignKey=true)]
+		public Role Role
 		{
 			get
 			{
-				return this._PHANQUYEN.Entity;
+				return this._Role.Entity;
 			}
 			set
 			{
-				PHANQUYEN previousValue = this._PHANQUYEN.Entity;
+				Role previousValue = this._Role.Entity;
 				if (((previousValue != value) 
-							|| (this._PHANQUYEN.HasLoadedOrAssignedValue == false)))
+							|| (this._Role.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._PHANQUYEN.Entity = null;
+						this._Role.Entity = null;
 						previousValue.KHACHHANGs.Remove(this);
 					}
-					this._PHANQUYEN.Entity = value;
+					this._Role.Entity = value;
 					if ((value != null))
 					{
 						value.KHACHHANGs.Add(this);
-						this._MaQuyen = value.MaQuyen;
+						this._MaRole = value.MaRole;
 					}
 					else
 					{
-						this._MaQuyen = default(int);
+						this._MaRole = default(int);
 					}
-					this.SendPropertyChanged("PHANQUYEN");
+					this.SendPropertyChanged("Role");
 				}
 			}
 		}
@@ -1056,15 +1020,15 @@ namespace Do_An_Wed.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHANQUYEN")]
-	public partial class PHANQUYEN : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
+	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaQuyen;
+		private int _MaRole;
 		
-		private string _TenQuyen;
+		private string _TenRole;
 		
 		private EntitySet<KHACHHANG> _KHACHHANGs;
 		
@@ -1072,59 +1036,59 @@ namespace Do_An_Wed.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaQuyenChanging(int value);
-    partial void OnMaQuyenChanged();
-    partial void OnTenQuyenChanging(string value);
-    partial void OnTenQuyenChanged();
+    partial void OnMaRoleChanging(int value);
+    partial void OnMaRoleChanged();
+    partial void OnTenRoleChanging(string value);
+    partial void OnTenRoleChanged();
     #endregion
 		
-		public PHANQUYEN()
+		public Role()
 		{
 			this._KHACHHANGs = new EntitySet<KHACHHANG>(new Action<KHACHHANG>(this.attach_KHACHHANGs), new Action<KHACHHANG>(this.detach_KHACHHANGs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQuyen", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaQuyen
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaRole", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaRole
 		{
 			get
 			{
-				return this._MaQuyen;
+				return this._MaRole;
 			}
 			set
 			{
-				if ((this._MaQuyen != value))
+				if ((this._MaRole != value))
 				{
-					this.OnMaQuyenChanging(value);
+					this.OnMaRoleChanging(value);
 					this.SendPropertyChanging();
-					this._MaQuyen = value;
-					this.SendPropertyChanged("MaQuyen");
-					this.OnMaQuyenChanged();
+					this._MaRole = value;
+					this.SendPropertyChanged("MaRole");
+					this.OnMaRoleChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenQuyen", DbType="NVarChar(10)")]
-		public string TenQuyen
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenRole", DbType="Char(10)")]
+		public string TenRole
 		{
 			get
 			{
-				return this._TenQuyen;
+				return this._TenRole;
 			}
 			set
 			{
-				if ((this._TenQuyen != value))
+				if ((this._TenRole != value))
 				{
-					this.OnTenQuyenChanging(value);
+					this.OnTenRoleChanging(value);
 					this.SendPropertyChanging();
-					this._TenQuyen = value;
-					this.SendPropertyChanged("TenQuyen");
-					this.OnTenQuyenChanged();
+					this._TenRole = value;
+					this.SendPropertyChanged("TenRole");
+					this.OnTenRoleChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHANQUYEN_KHACHHANG", Storage="_KHACHHANGs", ThisKey="MaQuyen", OtherKey="MaQuyen")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_KHACHHANG", Storage="_KHACHHANGs", ThisKey="MaRole", OtherKey="MaRole")]
 		public EntitySet<KHACHHANG> KHACHHANGs
 		{
 			get
@@ -1160,13 +1124,13 @@ namespace Do_An_Wed.Models
 		private void attach_KHACHHANGs(KHACHHANG entity)
 		{
 			this.SendPropertyChanging();
-			entity.PHANQUYEN = this;
+			entity.Role = this;
 		}
 		
 		private void detach_KHACHHANGs(KHACHHANG entity)
 		{
 			this.SendPropertyChanging();
-			entity.PHANQUYEN = null;
+			entity.Role = null;
 		}
 	}
 	
@@ -1190,9 +1154,9 @@ namespace Do_An_Wed.Models
 		
 		private System.Nullable<decimal> _GiaSP;
 		
-		private int _MaTH;
-		
 		private int _MaDM;
+		
+		private int _MaTH;
 		
 		private EntitySet<CHITIETDONHANG> _CHITIETDONHANGs;
 		
@@ -1218,10 +1182,10 @@ namespace Do_An_Wed.Models
     partial void OnSoluongSPChanged();
     partial void OnGiaSPChanging(System.Nullable<decimal> value);
     partial void OnGiaSPChanged();
-    partial void OnMaTHChanging(int value);
-    partial void OnMaTHChanged();
     partial void OnMaDMChanging(int value);
     partial void OnMaDMChanged();
+    partial void OnMaTHChanging(int value);
+    partial void OnMaTHChanged();
     #endregion
 		
 		public SANPHAM()
@@ -1372,31 +1336,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTH", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaTH
-		{
-			get
-			{
-				return this._MaTH;
-			}
-			set
-			{
-				if ((this._MaTH != value))
-				{
-					if (this._THUONGHIEU.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaTHChanging(value);
-					this.SendPropertyChanging();
-					this._MaTH = value;
-					this.SendPropertyChanged("MaTH");
-					this.OnMaTHChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDM", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDM", DbType="Int NOT NULL")]
 		public int MaDM
 		{
 			get
@@ -1420,7 +1360,31 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SANPHAM_CHITIETDONHANG", Storage="_CHITIETDONHANGs", ThisKey="MaSP,MaTH,MaDM", OtherKey="MaSP,MaTH,MaDM")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTH", DbType="Int NOT NULL")]
+		public int MaTH
+		{
+			get
+			{
+				return this._MaTH;
+			}
+			set
+			{
+				if ((this._MaTH != value))
+				{
+					if (this._THUONGHIEU.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaTHChanging(value);
+					this.SendPropertyChanging();
+					this._MaTH = value;
+					this.SendPropertyChanged("MaTH");
+					this.OnMaTHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SANPHAM_CHITIETDONHANG", Storage="_CHITIETDONHANGs", ThisKey="MaSP", OtherKey="MaSP")]
 		public EntitySet<CHITIETDONHANG> CHITIETDONHANGs
 		{
 			get
@@ -1630,7 +1594,7 @@ namespace Do_An_Wed.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuocgiaSX", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuocgiaSX", DbType="NChar(50)")]
 		public string QuocgiaSX
 		{
 			get

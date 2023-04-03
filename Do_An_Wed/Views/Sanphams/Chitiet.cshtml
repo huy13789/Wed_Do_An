@@ -1,0 +1,57 @@
+﻿
+@model Do_An_Wed.Models.SANPHAM
+@{
+    ViewBag.Title = "Chitiet";
+}
+
+<body>
+    <div class="container">
+        <div class="row category-page-row">
+            <div class="col-lg-3 hide-for-medium">
+                <div id="shop-sidebar" class="sidebar-inner col-inner">
+                    <aside id="search-3" class="widget widget_search">
+                        @Html.Action("Danhmuc", "Sanphams")
+                    </aside>
+                    <aside id="search-3" class="widget widget_search">
+                        @Html.Action("Thuonghieu", "Sanphams")
+                    </aside>
+                </div>
+            </div>
+
+            <!-- /.col-lg-3 -->
+            <div class="col-lg-9">
+                <div class="col-12">
+                    <h2 style="margin-left: 30px; color: rebeccapurple; font-weight: bold; "> THÔNG TIN MỸ PHẨM</h2>
+                    <div style="margin-bottom: 30px">
+                        <div style="margin-top: 40px; margin-left:30px;">
+                            <img src="~/Content/img/@Model.HinhanhSP"  style="width: 257px;height:257px;" />
+                        </div>
+                        <div style="color: rebeccapurple; margin-top: -33%; margin-bottom: 25%; margin-left: 36%; width: 40%">
+
+                            <h2 style="font-weight: bold"> @Model.TenSP</h2>
+                            <p style="font-weight: bold; border-top: 2px solid cornflowerblue;">Mã mỹ phẩm: @Html.DisplayFor(model => model.MaSP)</p>
+                            <p style="font-weight:bold">Thuộc danh mục : @Html.DisplayFor(model => model.DANHMUC.TenDM)</p>
+                            <p style="font-weight:bold">Thuộc thương hiệu : @Html.DisplayFor(model => model.THUONGHIEU.TenTH)</p>
+                            <p style="font-weight:bold">Mô tả : @Html.DisplayFor(model => model.MotaSP)</p>
+                            <p style="font-weight:bold"> Giá bán:<span style="color:red;font-size:16pt ">@string.Format("{0:0,0}", Model.GiaSP) VND</span></p>
+
+                            <div>
+                                <a style="clear: both; background-color: red; width: 120px;height: 35px; display: block; float: right;
+                        text-align: center; padding-top: 10px;color:white;
+                         text-decoration: none; font-weight: bold"
+                                   href="#" class="list-group-item">
+                                    Đặt Mua
+                                </a>
+                            </div>
+                            <p style="color: mediumblue; font-weight: bold; margin-top: 18px; float: left;">
+                                @Html.ActionLink("Trở Về Trang Chủ", "sanpham", "Sanphams")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+  
+</body>

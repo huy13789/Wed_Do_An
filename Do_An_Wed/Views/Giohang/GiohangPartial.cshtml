@@ -1,0 +1,13 @@
+﻿@if (Session["TaiKhoan"] == null)
+{
+<a href="/Account/Login" class="navbar-brand text-white " style="color; white; font-weight: bold; text-decoration: none;">
+    Giỏ Hàng
+</a>
+}
+else
+{
+<a href="/Giohang/Giohang" class="navbar-brand text-white " style="color; white; font-weight: bold; text-decoration: none;">
+    Giỏ Hàng (@Session["TongSoSp"])
+</a>
+}
+

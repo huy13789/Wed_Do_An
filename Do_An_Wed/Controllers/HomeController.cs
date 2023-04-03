@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Do_An_Wed.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,15 @@ namespace Do_An_Wed.Controllers
 {
     public class HomeController : Controller
     {
+        MyDataDataContext data = new MyDataDataContext();
+        private List<SANPHAM> laysachmoi(int count)
+        {
+            return data.SANPHAMs.OrderByDescending(a => a.NgaycapnhatSP).Take(count).ToList();
+        }
         public ActionResult Index()
         {
-            return View();
+            var spmoi = laysachmoi(6);
+            return View(spmoi);
         }
 
         public ActionResult About()
@@ -19,12 +26,10 @@ namespace Do_An_Wed.Controllers
 
             return View();
         }
-
-        public ActionResult Contact()
+       public ActionResult Gioithieu()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+     
     }
 }

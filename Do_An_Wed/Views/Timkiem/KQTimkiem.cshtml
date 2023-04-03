@@ -1,0 +1,73 @@
+﻿@using PagedList.Mvc;
+@using Do_An_Wed.Models
+@model PagedList.PagedList<Do_An_Wed.Models.SANPHAM>
+@{
+    ViewBag.Title = "KQTimkiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <div class="container">
+        <div class="row category-page-row">
+            <div class="col-lg-3 hide-for-medium">
+                <div id="shop-sidebar" class="sidebar-inner col-inner">
+                    <aside id="search-3" class="widget widget_search">
+                        @Html.Action("Danhmuc", "Sanphams")
+                    </aside>
+                    <aside id="search-3" class="widget widget_search">
+                        @Html.Action("Thuonghieu", "Sanphams")
+                    </aside>
+                </div>
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+                <div style="color: rebeccapurple; font-size:30px;margin-top:20px">@ViewBag.sanpham</div>
+                @foreach (var item in Model)
+                {
+                    <div>
+                       <p class="lead" style="font-weight: 600; color: #212529">kết quả tìm kiếm .....</p>
+
+                    </div>
+                    break;
+                }
+                <div class="col-12">
+                    <ul class="products" style="margin-top:20px">
+                        @{
+                            foreach (var item in Model)
+                            {
+
+                                <li style="flex-basis: 28%;">
+                                    <div class="product-item">
+
+                                        <div class="product-top">
+                                            <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-thumb">
+                                                <img src="@Url.Content("/Content/img/" + item.HinhanhSP)" width="250" height="250" />
+                                            </a>
+                                            <a href="#" class="buy-now">
+                                                mua ngay
+                                            </a>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-name"> @item.TenSP</a>
+                                            <div class="product-price">@item.GiaSP VND</div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<div style="text-align: center; ">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    <div class="MenuTrang" style="padding-left: 10%; ">
+        @Html.PagedListPager(Model, page => Url.Action("KQTimkiem", new { page = page, @sTukhoa = ViewBag.Tukhoa }))
+    </div>
+</div>
+

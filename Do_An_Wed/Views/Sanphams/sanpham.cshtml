@@ -1,0 +1,97 @@
+﻿@using PagedList.Mvc;
+@using Do_An_Wed.Models
+@model PagedList.PagedList<Do_An_Wed.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "sanpham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row category-page-row">
+        <div class="col-lg-3 hide-for-medium">
+            <div id="shop-sidebar" class="sidebar-inner col-inner">
+                <aside id="search-3" class="widget widget_search">
+                    @Html.Action("Danhmuc", "Sanphams")
+                </aside>
+                <aside id="search-3" class="widget widget_search">
+                    @Html.Action("Thuonghieu", "Sanphams")
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                <ul class="products" style="margin-top:20px">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <li class="mr-3" style="flex-basis: 28%;">
+                                <div class="product-item">
+                                    <div class="product-top">
+                                        <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-thumb">
+                                            <img src="@Url.Content("/Content/img/" + item.HinhanhSP)" width="250" height="250" />
+                                        </a>
+                                        <a href="#" class="buy-now">
+                                            <div class="DatMua">
+                                                <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-name"> @item.TenSP</a>
+                                        <div class="product-price">@item.GiaSP VND</div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="container" style="padding-top: 30px;">
+        <div class="row">
+            <div class="col-md-3">
+
+                @Html.Action("Danhmuc", "Sanphams")
+            </div>
+            <hr />
+            <div class="col-md-3">
+                @Html.Action("Thuonghieu", "Sanphams")
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="col-12">
+                <ul class="products" style="margin-top:20px">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <li style="flex-basis: 28%;">
+                                <div class="product-item">
+
+                                    <div class="product-top">
+                                        <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-thumb">
+                                            <img src="@Url.Content("/Content/img/" + item.HinhanhSP)" width="250" height="250" />
+                                        </a>
+                                        <a href="#" class="buy-now">
+                                            mua ngay
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-name"> @item.TenSP</a>
+                                        <div class="product-price">@item.GiaSP VND</div>
+                                    </div>
+
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+*@
