@@ -176,6 +176,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhmucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonhangController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachhangController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanphamController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThuonghieuController.cs" />
@@ -277,6 +278,10 @@
     <Content Include="Areas\Admin\Views\Admin\Suaad.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Xoaad.cshtml" />
     <Content Include="Areas\Admin\Views\SanPham\Suasp.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhang\SuaDH.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhang\XoaDH.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhang\ChitietDH.cshtml" />
     <None Include="Models\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>

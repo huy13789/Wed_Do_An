@@ -65,7 +65,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
                 ViewBag.ThongBao = "Tên thương hiệu đã tồn tại";
                 return View(taikhoa);
             }
-            ViewBag.MaQuyen = new SelectList(data.Roles.ToList().OrderBy(n => n.MaRole), "MaRole", "TenRole");
+            ViewBag.MaRole = new SelectList(data.Roles.ToList().OrderBy(n => n.MaRole), "MaRole", "TenRole");
             data.KHACHHANGs.InsertOnSubmit(taikhoa);
             data.SubmitChanges();
             return RedirectToAction("QLAdmin");
