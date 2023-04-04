@@ -19,8 +19,8 @@
         <nav class="navbar navbar-expand-lg bg-black text-white" style="font-family:Arial">
             <div class="container-fluid" style="justify-content:space-evenly; position:relative;">
                 <div>
-                    <img  style="width: 100px;" src="~/Content/img/hinhnen1.png" />
-                  
+                    <img style="width: 100px;" src="~/Content/img/hinhnen1.png" />
+
                 </div>
                 <div class="font-banner">
                     <a class="navbar-brand text-white " href="/home/index/">TRANG CHỦ</a>
@@ -28,10 +28,10 @@
                     <div class="dropdown">
                         <a class="dropbtn navbar-brand text-white" href="/sanphams/sanpham/">SẢN PHẨM</a>
                         @*<div class="dropdown-content">
-                            <a href="#">Kem</a>
-                            <a href="#">Son</a>
-                            <a href="#">Phấn</a>
-                        </div>*@
+                    <a href="#">Kem</a>
+                    <a href="#">Son</a>
+                    <a href="#">Phấn</a>
+                </div>*@
                     </div>
                     <!-----het dropdown list-->
                     <!------->
@@ -49,13 +49,16 @@
                 @using (Html.BeginForm("LayTuKhoaTimKiem", "Timkiem"))
                 {
 
-                       <div class="input-group">
-                          <input type="text" class="form-control" placeholder="Nhập tên sản phẩm...">
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-outline-success">Tìm kiếm</button>
-                          </div>
+               
+                    <div class="input-group">
+
+                        <input type="text" name="sTukhoa"  class="form-control" placeholder="Nhập tên sản phẩm...">
+
+                        <div class="input-group-append">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" />
                         </div>
-                    }
+                    </div>
+                }
                 <div>
                     <img src="https://theme.hstatic.net/1000376837/1000904744/14/cart-icon.png?v=650" style="width:25px;" />
                     @Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")

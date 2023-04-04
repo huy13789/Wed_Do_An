@@ -19,7 +19,7 @@
     {
 <tr>
     <td>@Html.DisplayFor(modelItem => item.Masp)</td>
-    <td><img src="@item.hinh" alt="hinh anh" width="180" /></td>
+    <td><img src="~/Content/img/@item.hinh" alt="hinh anh" width="180" /></td>
     @using (Html.BeginForm("Cannhapgiohang", "GioHang", new { @id = item.Masp }))
             {
                     <td>@String.Format("{0:0,0}", item.giaban) VNĐ</td>

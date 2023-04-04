@@ -5,47 +5,36 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>ChitietDH</h2>
 
-<div>
-    <h4>DONHANG</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayDH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ngaygiao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ngaygiao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Trangthai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Trangthai)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaKH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaKH)
-        </dd>
-
-    </dl>
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 card border rounded-4">
+            <h2 class="text-center">Chi tiết đơn hàng</h2>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">ngay đặt hàng:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.NgayDH)</dd>
+                <dt class="col-sm-3">ngày giao:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Ngaygiao)</dd>
+                <dt class="col-sm-3">trạng thái:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Trangthai)</dd>
+                <dt class="col-sm-3">khách hàng:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.KHACHHANG.HoTen)</dd>
+            </dl>
+            <div class="text-center">
+                @Html.ActionLink("Back to page", "Index", null, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink("Edit", "SuaDH", new { id = Model.MaDH }, new { @class = "btn btn-danger btn-xs" })
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "SuaDH", new { id = Model.MaDH }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<style>
+    dt {
+        font-weight: bold;
+    }
+
+    hr {
+        border-color: #999999;
+    }
+</style>

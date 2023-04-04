@@ -32,7 +32,7 @@
                             <p style="font-weight: bold; border-top: 2px solid cornflowerblue;">Mã mỹ phẩm: @Html.DisplayFor(model => model.MaSP)</p>
                             <p style="font-weight:bold">Thuộc danh mục : @Html.DisplayFor(model => model.DANHMUC.TenDM)</p>
                             <p style="font-weight:bold">Thuộc thương hiệu : @Html.DisplayFor(model => model.THUONGHIEU.TenTH)</p>
-                            <p style="font-weight:bold">Mô tả : @Html.DisplayFor(model => model.MotaSP)</p>
+                            <p style="font-weight:bold">Mô tả : @Html.Raw(Model.MotaSP)</p>
                             <p style="font-weight:bold"> Giá bán:<span style="color:red;font-size:16pt ">@string.Format("{0:0,0}", Model.GiaSP) VND</span></p>
 
                             <div>

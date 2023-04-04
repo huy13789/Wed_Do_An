@@ -47,7 +47,7 @@ namespace Do_An_Wed.Areas.Admin.Controllers
         public ActionResult themad()
         {
 
-            ViewBag.MaQuyen = new SelectList(data.Roles.ToList().OrderBy(n => n.MaRole), "MaRole", "TenRole");
+            ViewBag.MaRole = new SelectList(data.Roles.ToList().OrderBy(n => n.MaRole), "MaRole", "TenRole");
             return View();
         }
         [HttpPost]

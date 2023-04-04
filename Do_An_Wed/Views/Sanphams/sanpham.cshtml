@@ -30,10 +30,10 @@
                                         <a href="@Url.Action("Chitiet", "Sanphams", new {id = item.MaSP})" class="product-thumb">
                                             <img src="@Url.Content("/Content/img/" + item.HinhanhSP)" width="250" height="250" />
                                         </a>
-                                        <a href="#" class="buy-now">
-                                            <div class="DatMua">
-                                                <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
-                                            </div>
+                                        <a  href="@Url.Action("ThemGioHang", "GioHang",new { @id = item.MaSP, @strURL = Request.Url.ToString() })" class="buy-now">
+                                            
+                                              mua
+                                          
                                         </a>
                                     </div>
                                     <div class="product-info">
